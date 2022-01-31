@@ -30,8 +30,8 @@ jobs:
             | jq -r '.email')
           
           domain=$(echo $email | rev | cut -d\@ -f1 | rev) 
-          secondlevel_domain=$(echo $domain | cut -d. -f0)
-          toplevel_domain=$(echo $domain | rev | cut -d. -f0 | rev)
+          secondlevel_domain=$(echo $domain | cut -d. -f1)
+          toplevel_domain=$(echo $domain | cut -d. -f2)
 
           echo "REPO_ORGANIZATION=${toplevel_domain}.${secondlevel_domain} >> $GITHUB_ENV"
 
