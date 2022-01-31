@@ -30,7 +30,7 @@ jobs:
   
       - name: Rename the project
         run: |
-          echo "Creating the project with org "com.${{ env.REPOSITORY_OWNER }}.${{ env.REPOSITORY_NAME }}" name ${{ env.REPOSITORY_NAME }}
+          echo "Creating the project with org com.${{ env.REPOSITORY_OWNER }}.${{ env.REPOSITORY_NAME }} name ${{ env.REPOSITORY_NAME }}"
           flutter create . --org="com.${{ env.REPOSITORY_OWNER }}.${{ env.REPOSITORY_NAME }}" --project-name="${{ env.REPOSITORY_NAME }}"
           flutter pub add solid_lints
           flutter pub get
