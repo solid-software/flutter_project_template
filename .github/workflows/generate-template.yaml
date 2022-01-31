@@ -38,7 +38,7 @@ jobs:
           secondlevel_domain=$(echo $domain | cut -d. -f1)
           toplevel_domain=$(echo $domain | cut -d. -f2)
 
-          echo "REPO_ORGANIZATION=${toplevel_domain}.${secondlevel_domain} >> $GITHUB_ENV"
+          echo "REPO_ORGANIZATION=${toplevel_domain}.${secondlevel_domain}" >> $GITHUB_ENV
 
       - name: Get Flutter SDK
         uses: subosito/flutter-action@v1
@@ -49,6 +49,7 @@ jobs:
         run: |
           organization="${{ env.REPO_ORGANIZATION }}.${{ env.REPOSITORY_NAME }}"
           repo_name="${{ env.REPOSITORY_NAME }}"
+
           echo "Creating the project with org ${organization} name ${repo_name}"
           
           flutter create . \
