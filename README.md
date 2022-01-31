@@ -1,1 +1,1 @@
-# 3-days-template
+# project-template
