@@ -24,6 +24,9 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Check formatting
+        run: dart format . --set-exit-if-changed
+
       - name: Run tests
         run: |
           [ -d "test" ] && flutter test -r expanded
