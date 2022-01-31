@@ -15,7 +15,9 @@ jobs:
         run: flutter pub get
 
       - name: Run static code analysis
-        run: flutter analyze
+        uses: invertase/github-action-dart-analyzer@v1
+        with:
+          fatal-infos: true
 
       - name: Dart Code Metrics
         uses: dart-code-checker/dart-code-metrics-action@v1
