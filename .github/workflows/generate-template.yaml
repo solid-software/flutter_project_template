@@ -22,6 +22,18 @@ jobs:
 
       - run: echo "REPOSITORY_OWNER=$(echo '${{ github.repository }}' | awk -F '/' '{print $1}')" >> $GITHUB_ENV
         shell: bash
+      
+      - run: |
+          email=$(curl \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/users/${{ env.REPOSITORY_OWNER }} \
+            | jq -r '.email')
+          
+          domain=$(echo $email | rev | cut -d\@ -f1 | rev) 
+          secondlevel_domain=$(echo $domain | cut -d. -f0)
+          toplevel_domain=$(echo $domain | rev | cut -d. -f0 | rev)
+
+          echo "REPO_ORGANIZATION=${toplevel_domain}.${secondlevel_domain} >> $GITHUB_ENV"
 
       - name: Get Flutter SDK
         uses: subosito/flutter-action@v1
@@ -30,11 +42,13 @@ jobs:
   
       - name: Rename the project
         run: |
-          echo "Creating the project with org com.${{ env.REPOSITORY_OWNER }}.${{ env.REPOSITORY_NAME }} name ${{ env.REPOSITORY_NAME }}"
+          organization="${{ env.REPO_ORGANIZATION }}.${{ env.REPOSITORY_NAME }}"
+          repo_name="${{ env.REPOSITORY_NAME }}"
+          echo "Creating the project with org ${organization} name ${repo_name}"
           
           flutter create . \
-            --org="com.${{ env.REPOSITORY_OWNER }}.${{ env.REPOSITORY_NAME }}" \
-            --project-name="${{ env.REPOSITORY_NAME }}"
+            --org="$organization" \
+            --project-name="${repo_name}"
           
           flutter pub add --dev solid_lints
           flutter pub get
