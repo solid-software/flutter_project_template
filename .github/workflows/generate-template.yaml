@@ -31,7 +31,7 @@ jobs:
 
           if [ $email == null ]; then
             echo "REPO_ORGANIZATION=com.${{ env.REPOSITORY_OWNER }} >> $GITHUB_ENV"
-            exit(0)
+            exit 0;
           fi
           
           domain=$(echo $email | rev | cut -d\@ -f1 | rev) 
