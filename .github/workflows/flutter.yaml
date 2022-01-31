@@ -29,5 +29,5 @@ jobs:
 
       - name: Run tests
         run: |
-          [ -d "test" ] && flutter test -r expanded
+          [ -d "test" ] && flutter test -r expanded || echo "Tests not found."
           # run tests if `test` folder exists
