@@ -29,7 +29,6 @@ jobs:
           channel: 'stable'
   
       - name: Rename the project
-        if: steps.is_template.outputs.is_template == 'true'
         run: |
           echo "Creating the project with org "com.${{ env.REPOSITORY_OWNER }}.${{ env.REPOSITORY_NAME }}" name ${{ env.REPOSITORY_NAME }}
           flutter create . --org="com.${{ env.REPOSITORY_OWNER }}.${{ env.REPOSITORY_NAME }}" --project-name="${{ env.REPOSITORY_NAME }}"
