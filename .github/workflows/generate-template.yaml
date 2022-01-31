@@ -22,11 +22,12 @@ jobs:
 
       - run: echo "REPOSITORY_OWNER=$(echo '${{ github.repository }}' | awk -F '/' '{print $1}')" >> $GITHUB_ENV
         shell: bash
-        
-      - name: Is this still a template
-        id: is_template
-        run: echo "::set-output name=is_template::$(ls .github/template.yml &> /dev/null && echo true || echo false)"
 
+      - name: Get Flutter SDK
+        uses: subosito/flutter-action@v1
+        with:
+          channel: 'stable'
+  
       - name: Rename the project
         if: steps.is_template.outputs.is_template == 'true'
         run: |
