@@ -28,6 +28,11 @@ jobs:
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/users/${{ env.REPOSITORY_OWNER }} \
             | jq -r '.email')
+
+          if [ $email == null ]; then
+            echo "REPO_ORGANIZATION=com.${{ env.REPOSITORY_OWNER }} >> $GITHUB_ENV"
+            exit(0)
+          fi
           
           domain=$(echo $email | rev | cut -d\@ -f1 | rev) 
           secondlevel_domain=$(echo $domain | cut -d. -f1)
