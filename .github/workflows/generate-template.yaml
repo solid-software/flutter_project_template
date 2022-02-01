@@ -45,7 +45,7 @@ jobs:
         with:
           channel: 'stable'
   
-      - name: Rename the project
+      - name: Create the project
         run: |
           organization="${{ env.REPO_ORGANIZATION }}.${{ env.REPOSITORY_NAME }}"
           repo_name="${{ env.REPOSITORY_NAME }}"
