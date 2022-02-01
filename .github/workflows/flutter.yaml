@@ -5,7 +5,7 @@ jobs:
   code-check:
     # Check if file exists, rather than repo name - as initial run fails before flutter create executed.
     # https://github.community/t/is-the-hashfiles-function-actually-available-in-the-if-context/202545
-    if: ${{ always() && hashFiles('pubspec.yaml') != '' }}
+    if: ${{ always() && hashFiles('pubspec.yaml') }}
     runs-on: ubuntu-latest
 
     steps:
