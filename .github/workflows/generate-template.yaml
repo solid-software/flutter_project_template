@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   rename-project:
-    if: ${{ github.repository	!= 'solid-software/project-template' }}
+    if: ${{ github.repository	!= 'solid-software/flutter_project_template' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -65,7 +65,7 @@ jobs:
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "✅ Ready to clone and code."
+          commit_message: "Ready to clone and code."
           # commit_options: '--amend --no-edit'
           push_options: --force
 
