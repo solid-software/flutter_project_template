@@ -3,37 +3,49 @@ on: [push, pull_request]
 
 jobs:
   code-check:
-    # Check if file exists, rather than repo name - as initial run fails before flutter create executed.
-    # https://github.community/t/is-the-hashfiles-function-actually-available-in-the-if-context/202545
-    if: ${{ always() && hashFiles('pubspec.yaml') }}
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v1
-      - uses: subosito/flutter-action@v1
+          
+      - name: Check file existence
+        id: check_files
+        uses: andstor/file-existence-action@v1
+        with:
+          files: "pubspec.yaml"
+
+      - name: Setup flutter
+        if: steps.check_files.outputs.files_exists == 'true'
+        uses: subosito/flutter-action@v1
         with:
           channel: 'stable'
-
+      
       - name: Get dependencies
+        if: steps.check_files.outputs.files_exists == 'true'
         run: flutter pub get
 
       - name: Run static code analysis
+        if: steps.check_files.outputs.files_exists == 'true'
         uses: invertase/github-action-dart-analyzer@v1
         with:
           fatal-infos: true
 
       - name: Dart Code Metrics
+        if: steps.check_files.outputs.files_exists == 'true'
         uses: dart-code-checker/dart-code-metrics-action@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check formatting
+        if: steps.check_files.outputs.files_exists == 'true'
         run: dart format . --set-exit-if-changed
 
       - name: Run tests
+        if: steps.check_files.outputs.files_exists == 'true'
         run: |
           [ -d "test" ] && flutter test -r expanded || echo "Tests not found."
           # run tests if `test` folder exists
 
       - name: Check pubspec.lock
+        if: steps.check_files.outputs.files_exists == 'true'
         run: git diff --exit-code pubspec.lock
