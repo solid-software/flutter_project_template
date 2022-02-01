@@ -3,7 +3,8 @@ on: [push, pull_request]
 
 jobs:
   code-check:
-    if: ${{ github.repository	!= 'solid-software/flutter_project_template' }}
+    # Check if file exists, rather than repo name - as initial run fails before flutter create executed.
+    if: hashFiles('pubspec.yaml') != ''
     runs-on: ubuntu-latest
 
     steps:
