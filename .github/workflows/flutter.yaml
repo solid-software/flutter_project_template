@@ -45,7 +45,3 @@ jobs:
         run: |
           [ -d "test" ] && flutter test -r expanded || echo "Tests not found."
           # run tests if `test` folder exists
-
-      - name: Check pubspec.lock
-        if: steps.check_files.outputs.files_exists == 'true'
-        run: git diff --exit-code pubspec.lock
