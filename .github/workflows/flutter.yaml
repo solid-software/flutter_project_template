@@ -43,5 +43,10 @@ jobs:
       - name: Run tests
         if: steps.check_files.outputs.files_exists == 'true'
         run: |
-          [ -d "test" ] && flutter test -r expanded || echo "Tests not found."
           # run tests if `test` folder exists
+          if [ -d test ]
+          then
+              flutter test -r expanded
+          else
+              echo "Tests not found."
+          fi
