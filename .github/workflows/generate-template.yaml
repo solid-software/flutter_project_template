@@ -65,7 +65,7 @@ jobs:
 
       - name: Set dart sdk version
         run: |
-          a=`sed '22!d' pubspec.yaml` && sed -i "s/$a/sdk: '>=2.15 <4.0.0'/1" pubspec.yaml
+          a=`sed '22!d' pubspec.yaml` && sed -i "s/$a/  sdk: '>=2.17.0 <4.0.0'/1" pubspec.yaml
 
       - name: Self-destruct
         run: |
