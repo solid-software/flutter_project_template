@@ -5,11 +5,9 @@ on: [push]
 permissions:
   contents: write
 
-# if condition must be changed to github.repository = 'solid-software/flutter_project_template'
-
 jobs:
   create-project:
-    if: ${{ github.repository	!= 'solid-software/flutter_project_template' }}
+    if: ${{ github.repository	!= 'solid-oleksandrhordiienko/flutter_project_template' }}
     runs-on: ubuntu-latest
     steps:
     
@@ -64,6 +62,10 @@ jobs:
           
           flutter pub add --dev solid_lints
           flutter pub get
+
+      - name: Set dart sdk version
+        run: |
+          a="" && a=(`sed '22!d' pubspec.yaml`) && sed -i "" "s/$a/sdk: '>=2.15 <4.0.0'/" pubspec.yaml
 
       - name: Self-destruct
         run: |
