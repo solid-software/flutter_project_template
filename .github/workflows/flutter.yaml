@@ -37,9 +37,14 @@ jobs:
         run: |
           if [ -d lib ]
           then
-            dart run dart_code_metrics:metrics analyze lib --fatal-warnings --fatal-performance --fatal-style
-            dart run dart_code_metrics:metrics check-unused-files lib --fatal-unused
-            dart run dart_code_metrics:metrics check-unused-code lib --fatal-unused
+            dart run dart_code_metrics:metrics analyze lib \
+              --fatal-warnings \
+              --fatal-performance \
+              --fatal-style
+            dart run dart_code_metrics:metrics check-unused-files lib \
+              --fatal-unused
+            dart run dart_code_metrics:metrics check-unused-code lib \
+              --fatal-unused
           else
             echo "Lib folder is not found."
           fi
@@ -49,9 +54,14 @@ jobs:
         run: |
           if [ -d test ]
           then
-            dart run dart_code_metrics:metrics analyze test --fatal-warnings --fatal-performance --fatal-style
-            dart run dart_code_metrics:metrics check-unused-files test --fatal-unused
-            dart run dart_code_metrics:metrics check-unused-code test --fatal-unused
+            dart run dart_code_metrics:metrics analyze test \
+              --fatal-warnings \
+              --fatal-performance \
+              --fatal-style
+            dart run dart_code_metrics:metrics check-unused-files test \
+              --fatal-unused
+            dart run dart_code_metrics:metrics check-unused-code test \
+              --fatal-unused
           else
             echo "Test folder is not found."
           fi
@@ -61,9 +71,14 @@ jobs:
         run: |
           if [ -d example ]
           then
-            dart run dart_code_metrics:metrics analyze example --fatal-warnings --fatal-performance --fatal-style
-            dart run dart_code_metrics:metrics check-unused-files example --fatal-unused
-            dart run dart_code_metrics:metrics check-unused-code example --fatal-unused
+            dart run dart_code_metrics:metrics analyze example \
+              --fatal-warnings \
+              --fatal-performance \
+              --fatal-style
+            dart run dart_code_metrics:metrics check-unused-files example \
+              --fatal-unused
+            dart run dart_code_metrics:metrics check-unused-code example \
+              --fatal-unused
           else
             echo "Example folder is not found."
           fi
