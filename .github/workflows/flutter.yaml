@@ -34,19 +34,19 @@ jobs:
 
       - name: Dart Code Metrics analyze
         if: steps.check_files.outputs.files_exists == 'true'
-        run: dart run dart_code_metrics:metrics analyze lib --fatal-warnings --fatal-performance --fatal-style
+        run: dart run dart_code_metrics:metrics analyze ./ --fatal-warnings --fatal-performance --fatal-style
       
       - name: Dart Code Metrics check-unnecessary-nullable
         if: steps.check_files.outputs.files_exists == 'true'
-        run: dart run dart_code_metrics:metrics check-unnecessary-nullable --fatal-warnings --fatal-performance --fatal-style
+        run: dart run dart_code_metrics:metrics check-unnecessary-nullable ./ --fatal-warnings --fatal-performance --fatal-style
 
       - name: Dart Code Metrics check-unused-files
         if: steps.check_files.outputs.files_exists == 'true'
-        run: dart run dart_code_metrics:metrics check-unused-files --fatal-warnings --fatal-performance --fatal-style
+        run: dart run dart_code_metrics:metrics check-unused-files ./ --fatal-warnings --fatal-performance --fatal-style
 
       - name: Dart Code Metrics check-unused-code
         if: steps.check_files.outputs.files_exists == 'true'
-        run: dart run dart_code_metrics:metrics check-unused-code --fatal-warnings --fatal-performance --fatal-style
+        run: dart run dart_code_metrics:metrics check-unused-code ./ --fatal-warnings --fatal-performance --fatal-style
 
       - name: Check formatting
         if: steps.check_files.outputs.files_exists == 'true'
