@@ -32,55 +32,33 @@ jobs:
         if: steps.check_files.outputs.files_exists == 'true'
         run: dart pub add --dev dart_code_metrics
 
-      - name: Dart Code Metrics for lib folder
+      - name: Dart Code Metrics
         if: steps.check_files.outputs.files_exists == 'true'
         run: |
+          dirs_to_analyse=""
           if [ -d lib ]
           then
-            dart run dart_code_metrics:metrics analyze lib \
-              --fatal-warnings \
-              --fatal-performance \
-              --fatal-style
-            dart run dart_code_metrics:metrics check-unused-files lib \
-              --fatal-unused
-            dart run dart_code_metrics:metrics check-unused-code lib \
-              --fatal-unused
-          else
-            echo "Lib folder is not found."
+            dirs_to_analyse+=" lib"
           fi
-
-      - name: Dart Code Metrics for test folder
-        if: steps.check_files.outputs.files_exists == 'true'
-        run: |
           if [ -d test ]
           then
-            dart run dart_code_metrics:metrics analyze test \
-              --fatal-warnings \
-              --fatal-performance \
-              --fatal-style
-            dart run dart_code_metrics:metrics check-unused-files test \
-              --fatal-unused
-            dart run dart_code_metrics:metrics check-unused-code test \
-              --fatal-unused
-          else
-            echo "Test folder is not found."
+            dirs_to_analyse+=" test"
           fi
-
-      - name: Dart Code Metrics for example folder
-        if: steps.check_files.outputs.files_exists == 'true'
-        run: |
           if [ -d example ]
           then
-            dart run dart_code_metrics:metrics analyze example \
+            dirs_to_analyse+=" example"
+          fi
+
+          if [ dirs_to_analyse != "" ]
+          then
+            dart run dart_code_metrics:metrics analyze $dirs_to_analyse \
               --fatal-warnings \
               --fatal-performance \
               --fatal-style
-            dart run dart_code_metrics:metrics check-unused-files example \
+            dart run dart_code_metrics:metrics check-unused-files $dirs_to_analyse \
               --fatal-unused
-            dart run dart_code_metrics:metrics check-unused-code example \
+            dart run dart_code_metrics:metrics check-unused-code $dirs_to_analyse \
               --fatal-unused
-          else
-            echo "Example folder is not found."
           fi
 
       - name: Check formatting
