@@ -30,7 +30,7 @@ jobs:
       
       - name: Setup Dart Code Metrics
         if: steps.check_files.outputs.files_exists == 'true'
-        run: dart pub add --dev dart_code_metrics
+        run: dart pub global activate dart_code_metrics
 
       - name: Dart Code Metrics
         if: steps.check_files.outputs.files_exists == 'true'
@@ -51,13 +51,13 @@ jobs:
 
           if [ dirs_to_analyse != "" ]
           then
-            dart run dart_code_metrics:metrics analyze $dirs_to_analyse \
+            metrics analyze $dirs_to_analyse \
               --fatal-warnings \
               --fatal-performance \
               --fatal-style
-            dart run dart_code_metrics:metrics check-unused-files $dirs_to_analyse \
+            metrics check-unused-files $dirs_to_analyse \
               --fatal-unused
-            dart run dart_code_metrics:metrics check-unused-code $dirs_to_analyse \
+            metrics check-unused-code $dirs_to_analyse \
               --fatal-unused
           fi
 
