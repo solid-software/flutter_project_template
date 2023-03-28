@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   create-project:
-    if: ${{ github.repository	== 'solid-software/flutter_project_template' }}
+    if: ${{ github.repository	!= 'solid-software/flutter_project_template' }}
     runs-on: ubuntu-latest
     steps:
     
