@@ -35,26 +35,26 @@ jobs:
       - name: Dart Code Metrics
         if: steps.check_files.outputs.files_exists == 'true'
         run: |
-          dirs_to_analyse=""
-          if [ -d lib ]; then dirs_to_analyse+=" lib"; fi
-          if [ -d test ]; then dirs_to_analyse+=" test"; fi
-          if [ -d example ]; then dirs_to_analyse+=" example"; fi
+          dirs_to_analyze=""
+          if [ -d lib ]; then dirs_to_analyze+=" lib"; fi
+          if [ -d test ]; then dirs_to_analyze+=" test"; fi
+          if [ -d example ]; then dirs_to_analyze+=" example"; fi
 
-          if [ dirs_to_analyse != "" ]
+          if [ dirs_to_analyze != "" ]
           then
             dart run dart_code_metrics:metrics \
               analyze \
-              $dirs_to_analyse \
+              $dirs_to_analyze \
               --fatal-warnings \
               --fatal-performance \
               --fatal-style
             dart run dart_code_metrics:metrics \
               check-unused-files \
-              $dirs_to_analyse \
+              $dirs_to_analyze \
               --fatal-unused
             dart run dart_code_metrics:metrics \
               check-unused-code \ 
-              $dirs_to_analyse \
+              $dirs_to_analyze \
               --fatal-unused
           fi
 
