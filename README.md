@@ -1,4 +1,6 @@
 # flutter_project_template
+[![flutter_project_template](https://nokycucwgzweensacwfy.supabase.co/functions/v1/get_project_badge?projectName=flutter_project_template)](https://www.worklog.ai)
+
 📖 Template for flutter projects using solid_lints, CI for tests and analysis.
 
 - Uses latest stable flutter
