@@ -29,6 +29,7 @@ jobs:
         run: flutter pub get
 
       - name: Run custom_lint
+        if: steps.check_files.outputs.files_exists == 'true'
         run: dart run custom_lint
 
       - name: Check formatting
