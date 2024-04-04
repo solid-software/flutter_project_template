@@ -28,6 +28,10 @@ jobs:
         if: steps.check_files.outputs.files_exists == 'true'
         run: flutter pub get
 
+      - name: Run static code analysis
+        if: steps.check_files.outputs.files_exists == 'true'
+        uses: invertase/github-action-dart-analyzer@v1
+
       - name: Run custom_lint
         if: steps.check_files.outputs.files_exists == 'true'
         run: dart run custom_lint
